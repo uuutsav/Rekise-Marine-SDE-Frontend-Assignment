@@ -29,7 +29,7 @@ const MapComponent = () => {
   }, []);
 
   return (
-    <div ref={mapElement} style={{ width: '100vw', height: '90vh' }}></div>
+    <div ref={mapElement} className='h-[90vh] w-[100vw]'></div>
   )
 }
 
