@@ -1,8 +1,22 @@
-# React + Vite
+# Rekise Marine -Assignment - SDE Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[Live Link](https://rekise-utsav.netlify.app/)
 
-Currently, two official plugins are available:
+[Email Me (utsav.will.work@gmail.com)](mailto:utsav.will.work@gmail.com)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Installation
+- ```git clone https://github.com/uuutsav/Rekise-Marine-SDE-Frontend-Assignment.git```
+- ```cd Rekise-Marine-SDE-Frontend-Assignment```
+- ```npm i```
+- ```npm run dev```
+
+## Assignment tasks pending
+- Polygon drawing and modal
+
+## Assignment tasks completed
+- Ability to draw LineString
+- Fetch and display LineString waypoints(coordinates)
+
+## Tentative date to complete - 20 Jan EOD. 
+
+I hope we will work together someday, have a nice day :)
