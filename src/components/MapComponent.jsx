@@ -9,10 +9,16 @@ import { OSM } from 'ol/source';
 import { Draw } from 'ol/interaction';
 import { Style, Stroke } from 'ol/style';
 import LineString from 'ol/geom/LineString';
+import WaypointDisplay from './WaypointDisplayComponent';
+import { getLength } from 'ol/sphere';
+import CardComponent from './CardComponent';
 
 const MapComponent = () => {
   const [map, setMap] = useState();
   const mapElement = useRef();
+  const [waypoints, setWaypoints] = useState([]);
+  const [modalVisibility, setModalVisibility] = useState(" ")
+
 
   useEffect(() => {
     // Base map layer
@@ -105,12 +111,51 @@ const MapComponent = () => {
     });
     map.addInteraction(draw);
 
+    draw.on('drawend', (event) => {
+      const geometry = event.feature.getGeometry();
+      const segmentPoints = [];
+      const segmentDistances = [];
+
+      geometry.forEachSegment((start, end) => {
+        segmentPoints.push(start);
+
+        const segmentDistance = getLength(new LineString([start, end]));
+        segmentDistances.push(segmentDistance);
+      });
+
+      // Set the state with segment details
+      setWaypoints(segmentPoints.map((point, index) => ({
+        point,
+        distanceToNext: segmentDistances[index] || null, // No distance for the last point
+      })));
+    });
+
+    const handleEnterPress = (event) => {
+      if (event.key === 'Enter') {
+        draw.finishDrawing();
+      }
+    };
+
+    document.addEventListener('keydown', handleEnterPress);
+
     setMap(map);
 
-    return () => map.setTarget(null);
+    console.log(waypoints)
+
+    return () => {
+      map.setTarget(null);
+      document.removeEventListener('keydown', handleEnterPress);
+    }
   }, []);
 
-  return <div ref={mapElement} className="h-[90vh] w-[100vw]"></div>;
+  return (
+    <>
+      <div className={`popup z-10 absolute ${modalVisibility} `}>
+        <CardComponent setModalVisibility={setModalVisibility} waypoints={waypoints} />
+      </div>
+      <div ref={mapElement} className="h-[90vh] w-[100vw]"></div>
+    </>
+  );
 };
 
 export default MapComponent;
