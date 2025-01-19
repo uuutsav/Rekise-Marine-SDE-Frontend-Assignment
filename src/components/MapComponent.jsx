@@ -9,7 +9,6 @@ import { OSM } from 'ol/source';
 import { Draw } from 'ol/interaction';
 import { Style, Stroke } from 'ol/style';
 import LineString from 'ol/geom/LineString';
-import WaypointDisplay from './WaypointDisplayComponent';
 import { getLength } from 'ol/sphere';
 import CardComponent from './CardComponent';
 
